@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коллекция редких книг - Заказ книги</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        nav a {
+            color: #a67c52;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: none;
+        }
+
+        nav a.active {
+            background-color: #a67c52;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #8b6b47;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0e6d8;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #8b6b47;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #8b6b47;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],
+        input[type="password"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d9c7a8;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #faf8f5;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #a67c52;
+            background-color: white;
+        }
+
+        .options-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .option-item {
+            background-color: #faf8f5;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #f0e6d8;
+        }
+
+        .option-item label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-item input {
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            background-color: #a67c52;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #8b6b47;
+        }
+
+        .form-note {
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index1.html">Главная</a>
+        <a href="index.html">Паспорт</a>
+        <a href="form.html" class="active">Заказать книгу</a>
+        <a href="algorithm.html">Алгоритмическая задача</a>
+    </nav>
+
+    <div class="container">
+        <h1>Заказ редкой книги</h1>
+
+        <form id="orderForm" action="https://httpbin.org/post" method="POST" class="order-form">
+
+            <!-- Контактные данные -->
+            <div class="form-section">
+                <h2>Контактные данные</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lastname">Фамилия *</label>
+                        <input type="text" id="lastname" name="lastname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Имя *</label>
+                        <input type="text" id="firstname" name="firstname" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="group">Группа *</label>
+                        <input type="text" id="group" name="group" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message_date">Дата заказа</label>
+                        <input type="date" id="message_date" name="message_date">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Детали заказа -->
+            <div class="form-section">
+                <h2>Детали заказа</h2>
+
+                <div class="form-group">
+                    <label for="book_type">Тип издания *</label>
+                    <select id="book_type" name="book_type" required>
+                        <option value="">Выберите тип издания</option>
+                        <option value="incunabula">Инкунабулы (XV век)</option>
+                        <option value="first_edition">Первые издания</option>
+                        <option value="manuscript">Рукописные кодексы</option>
+                        <option value="autograph">Книги с автографами</option>
+                        <option value="illustrated">Иллюстрированные издания</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="book_quantity">Количество *</label>
+                        <input type="number" id="book_quantity" name="book_quantity" min="1" max="5" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery_date">Дата доставки</label>
+                        <input type="date" id="delivery_date" name="delivery_date">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Состояние книги *</label>
+                    <div class="options-group">
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="book_condition" value="excellent" checked>
+                                Отличное
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="book_condition" value="good">
+                                Хорошее
+                            </label>
+                        </div>
+                        <div class="option-item">
+                            <label>
+                                <input type="radio" name="book_condition" value="satisfactory">
+                                Удовлетворительное
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Дополнительные опции -->
+            <div class="form-section">
+                <h2>Дополнительные опции</h2>
+                <div class="options-group">
+                    <div class="option-item">
+                        <label>
+                            <input type="checkbox" name="add_options" value="certificate">
+                            Сертификат подлинности (+500₽)
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <label>
+                            <input type="checkbox" name="add_options" value="restoration">
+                            Реставрация (+1000₽)
+                        </label>
+                    </div>
+                    <div class="option-item">
+                        <label>
+                            <input type="checkbox" name="add_options" value="delivery_insurance">
+                            Страховка доставки (+300₽)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Безопасность -->
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="order_password">Пароль для отслеживания заказа *</label>
+                    <input type="password" id="order_password" name="order_password" required minlength="6">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Оформить заказ книги</button>
+            <p class="form-note">* Поля, отмеченные звездочкой, обязательны для заполнения</p>
+        </form>
+    </div>
+</body>
+
+</html>

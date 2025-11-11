@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коллекция редких книг - Алгоритмическая задача</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #a67c52;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+        }
+
+        nav a.active {
+            background-color: #a67c52;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #8b6b47;
+            text-align: center;
+        }
+
+        h2 {
+            color: #8b6b47;
+            border-bottom: 2px solid #d9c7a8;
+            padding-bottom: 10px;
+        }
+
+        .task-section,
+        .solution-section,
+        .formula-section {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .task-condition {
+            background-color: #faf8f5;
+            padding: 15px;
+            border-left: 4px solid #a67c52;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #8b6b47;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d9c7a8;
+        }
+
+        button {
+            background-color: #a67c52;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .result-section {
+            background-color: #f0f2e9;
+            padding: 15px;
+            border: 1px solid #d9c7a8;
+            margin-top: 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div style="text-align: center;">
+            <a href="index1.html">Главная</a>
+            <a href="index.html">Паспорт</a>
+            <a href="form.html">Заказать книгу</a>
+            <a href="algorithm.html" class="active">Алгоритмическая задача</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Решение алгоритмической задачи</h1>
+
+        <div class="task-section">
+            <h2>Условие задачи</h2>
+            <div class="task-condition">
+                <p><strong>Задача:</strong> Рассчитать стоимость реставрации редкой книги</p>
+                <p><strong>Дано:</strong></p>
+                <ul>
+                    <li>Тип издания: инкунабула, первое издание, рукопись, книга с автографом</li>
+                    <li>Состояние книги: отличное, хорошее, удовлетворительное</li>
+                    <li>Объем работ: количество страниц для реставрации</li>
+                </ul>
+                <p><strong>Найти:</strong> Общую стоимость реставрационных работ</p>
+            </div>
+        </div>
+
+        <div class="solution-section">
+            <h2>Решение</h2>
+            <form id="restorationForm">
+                <div class="form-group">
+                    <label for="bookType">Тип издания:</label>
+                    <select id="bookType" name="bookType" required>
+                        <option value="">Выберите тип издания</option>
+                        <option value="incunabula">Инкунабула</option>
+                        <option value="first_edition">Первое издание</option>
+                        <option value="manuscript">Рукопись</option>
+                        <option value="autograph">Книга с автографом</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookCondition">Состояние книги:</label>
+                    <select id="bookCondition" name="bookCondition" required>
+                        <option value="">Выберите состояние</option>
+                        <option value="excellent">Отличное</option>
+                        <option value="good">Хорошее</option>
+                        <option value="satisfactory">Удовлетворительное</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pagesCount">Количество страниц для реставрации:</label>
+                    <input type="number" id="pagesCount" name="pagesCount" min="1" max="1000" value="100" required>
+                </div>
+
+                <button type="button" onclick="calculateRestorationCost()">Рассчитать стоимость</button>
+            </form>
+
+            <div id="result" class="result-section" style="display: none;">
+                <h3>Результат:</h3>
+                <p id="resultText"></p>
+                <div id="calculationDetails"></div>
+            </div>
+        </div>
+
+        <div class="formula-section">
+            <h2>Формулы расчета</h2>
+            <p>Общая стоимость = Базовая стоимость × Коэффициент состояния × Коэффициент типа × Количество страниц</p>
+            <p>Где:</p>
+            <ul>
+                <li>Базовая стоимость: 50 рублей за страницу</li>
+                <li>Коэффициент состояния: от 0.8 (отличное) до 1.5 (удовлетворительное)</li>
+                <li>Коэффициент типа: от 1.2 (первое издание) до 3.0 (инкунабула)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function calculateRestorationCost() {
+            const bookType = document.getElementById('bookType').value;
+            const bookCondition = document.getElementById('bookCondition').value;
+            const pagesCount = parseInt(document.getElementById('pagesCount').value);
+
+            if (!bookType || !bookCondition) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+
+            const baseCost = 50;
+
+            const conditionCoefficients = {
+                'excellent': 0.8,
+                'good': 1.0,
+                'satisfactory': 1.5
+            };
+
+            const typeCoefficients = {
+                'incunabula': 3.0,
+                'first_edition': 2.0,
+                'manuscript': 2.5,
+                'autograph': 1.8
+            };
+
+            const typeNames = {
+                'incunabula': 'Инкунабула',
+                'first_edition': 'Первое издание',
+                'manuscript': 'Рукопись',
+                'autograph': 'Книга с автографом'
+            };
+
+            const conditionNames = {
+                'excellent': 'Отличное',
+                'good': 'Хорошее',
+                'satisfactory': 'Удовлетворительное'
+            };
+
+            const conditionCoefficient = conditionCoefficients[bookCondition];
+            const typeCoefficient = typeCoefficients[bookType];
+            const totalCost = baseCost * conditionCoefficient * typeCoefficient * pagesCount;
+
+            const roundedCost = Math.round(totalCost);
+
+            const resultText = `Стоимость реставрации ${typeNames[bookType]} в ${conditionNames[bookCondition].toLowerCase()} состоянии (${pagesCount} страниц): <strong>${roundedCost} рублей</strong>`;
+
+            const details = `
+                <p><strong>Детали расчета:</strong></p>
+                <ul>
+                    <li>Базовая стоимость: ${baseCost} руб/страница</li>
+                    <li>Коэффициент состояния (${conditionNames[bookCondition]}): ${conditionCoefficient}</li>
+                    <li>Коэффициент типа (${typeNames[bookType]}): ${typeCoefficient}</li>
+                    <li>Количество страниц: ${pagesCount}</li>
+                    <li>Итог: ${baseCost} × ${conditionCoefficient} × ${typeCoefficient} × ${pagesCount} = ${roundedCost} руб</li>
+                </ul>
+            `;
+
+            document.getElementById('resultText').innerHTML = resultText;
+            document.getElementById('calculationDetails').innerHTML = details;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        document.getElementById('restorationForm').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateRestorationCost();
+            }
+        });
+    </script>
+</body>
+
+</html>
