@@ -4,48 +4,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Коллекция редких книг</title>
-    <link rel="stylesheet" href="passport-image.css">
-    <script src="script.js" defer></script>
+    <title>Каталог редких книг - Детальный обзор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #a67c52;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+        }
+
+        nav a.active {
+            background-color: #a67c52;
+            color: white;
+            border-radius: 3px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #8b6b47;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #8b6b47;
+            border-bottom: 2px solid #d9c7a8;
+            padding-bottom: 10px;
+        }
+
+        .book-detail {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .book-image {
+            flex: 0 0 300px;
+        }
+
+        .book-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-info {
+            flex: 1;
+        }
+
+        .book-info h2 {
+            margin-top: 0;
+            color: #8b6b47;
+        }
+
+        .book-meta {
+            background-color: #faf8f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .book-meta p {
+            margin: 8px 0;
+        }
+
+        .book-description {
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 250px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-link {
+            display: inline-block;
+            background-color: #a67c52;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .back-to-main {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .back-to-main a {
+            display: inline-block;
+            background-color: #a67c52;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .back-to-main a:hover {
+            background-color: #8b6b47;
+        }
+
+        .book-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .gallery-item {
+            text-align: center;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid #d9c7a8;
+        }
+
+        .gallery-item p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
-    <nav style="background: #ffffff;">
-        <a href="index1.html">Главная</a>
-        <a href="index.html" class="active">Паспорт</a>
-        <a href="form.html">Заказать книгу</a>
-        <a href="algorithm.html">Алгоритмическая задача</a>
+    <nav>
+        <div style="text-align: center;">
+            <a href="index1.html">Главная</a>
+            <a href="index.html" class="active">Каталог</a>
+            <a href="form.html">Заказать книгу</a>
+            <a href="algorithm.html">Алгоритмическая задача</a>
+        </div>
     </nav>
-    <a href="#screenshot">DOM_JS</a>
-    <div class="container">
-        <button onclick="toggleLanguage()">Изменить язык</button>
 
-        <div class="photo-container">
-            <img src="passport.jpg" alt="passport" class="scaled-photo">
-            <div class="passport-text">
-                <p id="text-mvd" class="text-mvd">ГУ МВД РОССИИ ПО Г. МОСКВЕ</p>
-                <p id="text-date" class="text-date">27.10. 2020<span class="spacer"></span>770-066</p>
-                <p id="text-surname" class="text-surname">ДОВГАЛЕВА</p>
-                <p id="text-name" class="text-name">КСЕНИЯ</p>
-                <p id="text-patronymic" class="text-patronymic">МИХАЙЛОВНА</p>
-                <p id="text-birthdate" class="text-birthdate">01.10..2006</p>
-                <p id="text-birthplace" class="text-birthplace">ГОР. МОСКВА</p>
+    <div>
+        <h1>Детальный каталог редких изданий</h1>
+
+
+        <div class="book-detail">
+            <div class="book-header">
+                <div class="book-image">
+                    <img src="incunabula.jpg" alt="Инкунабула XV века">
+                </div>
+                <div class="book-info">
+                    <h2>Инкунабулы</h2>
+                    <div class="book-meta">
+                        <p><strong>Период:</strong> XV век</p>
+                        <p><strong>Состояние:</strong> Музейное</p>
+                        <p><strong>Особенности:</strong> Первые печатные книги</p>
+                        <p><strong>Сохранность:</strong> Исключительная</p>
+                    </div>
+                    <div>
+                        <p>Инкунабулы (от лат. *incunabula* — «колыбель») — книги, изданные в Европе от начала
+                            книгопечатания до 1 января 1501 года. Эти ранние печатные издания имеют огромную
+                            историческую
+                            ценность.</p>
+                        <p>В нашей коллекции представлены редчайшие экземпляры инкунабул в превосходном музейном
+                            состоянии.
+                            Каждая книга сопровождается сертификатом подлинности и подробной исторической справкой.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="book-detail">
+        <div class="book-header">
+            <div class="book-image">
+                <img src="first-edition.jpg" alt="Первое издание">
+            </div>
+            <div class="book-info">
+                <h2>Первые издания</h2>
+                <div class="book-meta">
+                    <p><strong>Период:</strong> XVI-XX века</p>
+                    <p><strong>Состояние:</strong> Отличное</p>
+                    <p><strong>Особенности:</strong> Прижизненные публикации</p>
+                    <p><strong>Авторы:</strong> Классики мировой литературы</p>
+                </div>
+                <div class="book-description">
+                    <p>Первые издания знаменитых произведений представляют особый интерес для коллекционеров и
+                        исследователей. В нашей коллекции представлены прижизненные публикации великих авторов.</p>
+                    <p>Каждое издание проходит экспертизу на подлинность и сопровождается подробным описанием
+                        истории публикации и особенностей данного экземпляра.</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <h1 id="dom-title" style="color: #000000; text-align: center;">DOM_JS. Считываем информацию из DOM</h1>
 
-    <div id="screenshot" class="infa">
-        <img src="screen.png" alt="Достаем инфу из DOM"
-            style="max-width: 50%; height: auto; display: block; margin: 20px auto;">
+    <div class="book-detail">
+        <div class="book-header">
+            <div class="book-image">
+                <img src="manuscript.jpg" alt="Рукописный кодекс">
+            </div>
+            <div class="book-info">
+                <h2>Рукописные кодексы</h2>
+                <div class="book-meta">
+                    <p><strong>Период:</strong> XIV-XVI века</p>
+                    <p><strong>Состояние:</strong> Хорошее</p>
+                    <p><strong>Особенности:</strong> Уникальные миниатюры</p>
+                    <p><strong>Техника:</strong> Ручная переписка</p>
+                </div>
+                <div class="book-description">
+                    <p>Рукописные кодексы - это уникальные памятники средневековой культуры, созданные до
+                        изобретения книгопечатания. Каждый кодекс является произведением искусства, созданным
+                        вручную.</p>
+                    <p>Наши экземпляры содержат прекрасные миниатюры, инициалы и орнаменты, выполненные опытными
+                        писцами и художниками. Многие кодексы имеют историю, уходящую в глубину веков.</p>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
-    <a href="#top">
-        <h2>Наверх</h2>
-    </a>
+
+    <div class="book-detail">
+        <div class="book-header">
+            <div class="book-image">
+                <img src="autograph.jpg" alt="Книга с автографом">
+            </div>
+            <div class="book-info">
+                <h2>Книги с автографами</h2>
+                <div class="book-meta">
+                    <p><strong>Период:</strong> Разные эпохи</p>
+                    <p><strong>Состояние:</strong> Превосходное</p>
+                    <p><strong>Особенности:</strong> Подписи авторов</p>
+                    <p><strong>Аутентичность:</strong> Подтверждена</p>
+                </div>
+                <div class="book-description">
+                    <p>Книги с автографами авторов представляют особую ценность для библиофилов. В нашей коллекции
+                        собраны издания с подлинными подписями известных писателей, поэтов и общественных деятелей.
+                    </p>
+                    <p>Каждый автограф проходит тщательную экспертизу на подлинность. Мы предоставляем полную
+                        документацию, подтверждающую аутентичность подписи и историю владения книгой.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+
+
+    <div class="back-to-main">
+        <a href="index1.html">Вернуться на главную страницу</a>
+    </div>
+    </div>
 </body>
 
 </html>

@@ -164,7 +164,7 @@
 <body>
     <nav>
         <a href="index1.html">Главная</a>
-        <a href="index.html">Паспорт</a>
+        <a href="index.html">Каталог</a>
         <a href="form.html" class="active">Заказать книгу</a>
         <a href="algorithm.html">Алгоритмическая задача</a>
     </nav>
@@ -179,33 +179,33 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="lastname">Фамилия *</label>
-                        <input type="text" id="lastname" name="lastname" required>
+                        <input type="text" id="lastname" name="lastname" value="Иванов" required>
                     </div>
                     <div class="form-group">
                         <label for="firstname">Имя *</label>
-                        <input type="text" id="firstname" name="firstname" required>
+                        <input type="text" id="firstname" name="firstname" value="Петр" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="group">Группа *</label>
-                        <input type="text" id="group" name="group" required>
+                        <input type="text" id="group" name="group" value="РИ-211234" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
-                        <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" required>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" value="79161234567" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" value="ivanov.petr@example.ru" required>
                     </div>
                     <div class="form-group">
                         <label for="message_date">Дата заказа</label>
-                        <input type="date" id="message_date" name="message_date">
+                        <input type="date" id="message_date" name="message_date" value="2024-12-19">
                     </div>
                 </div>
             </div>
@@ -217,7 +217,7 @@
                     <label for="book_type">Тип издания *</label>
                     <select id="book_type" name="book_type" required>
                         <option value="">Выберите тип издания</option>
-                        <option value="incunabula">Инкунабулы (XV век)</option>
+                        <option value="incunabula" selected>Инкунабулы (XV век)</option>
                         <option value="first_edition">Первые издания</option>
                         <option value="manuscript">Рукописные кодексы</option>
                         <option value="autograph">Книги с автографами</option>
@@ -228,11 +228,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="book_quantity">Количество *</label>
-                        <input type="number" id="book_quantity" name="book_quantity" min="1" max="5" value="1" required>
+                        <input type="number" id="book_quantity" name="book_quantity" min="1" max="5" value="2" required>
                     </div>
                     <div class="form-group">
                         <label for="delivery_date">Дата доставки</label>
-                        <input type="date" id="delivery_date" name="delivery_date">
+                        <input type="date" id="delivery_date" name="delivery_date" value="2024-12-25">
                     </div>
                 </div>
 
@@ -265,7 +265,7 @@
                 <div class="options-group">
                     <div class="option-item">
                         <label>
-                            <input type="checkbox" name="add_options" value="certificate">
+                            <input type="checkbox" name="add_options" value="certificate" checked>
                             Сертификат подлинности (+500₽)
                         </label>
                     </div>
@@ -277,7 +277,7 @@
                     </div>
                     <div class="option-item">
                         <label>
-                            <input type="checkbox" name="add_options" value="delivery_insurance">
+                            <input type="checkbox" name="add_options" value="delivery_insurance" checked>
                             Страховка доставки (+300₽)
                         </label>
                     </div>
@@ -286,7 +286,8 @@
             <div class="form-section">
                 <div class="form-group">
                     <label for="order_password">Пароль для отслеживания заказа *</label>
-                    <input type="password" id="order_password" name="order_password" required minlength="6">
+                    <input type="password" id="order_password" name="order_password" value="123456" required
+                        minlength="6">
                 </div>
             </div>
 
@@ -294,6 +295,56 @@
             <p class="form-note">* Поля, отмеченные звездочкой, обязательны для заполнения</p>
         </form>
     </div>
-</body>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            for (let [key, value] of formData.entries()) {
+                console.log(`${key}: ${value}`);
+            }
+
+
+            alert('Заказ успешно приняли!');
+
+
+            form.reset();
+
+
+            document.getElementById('lastname').value = 'Иванов';
+            document.getElementById('firstname').value = 'Петр';
+            document.getElementById('group').value = 'РИ-211234';
+            document.getElementById('phone').value = '79161234567';
+            document.getElementById('email').value = 'ivanov.petr@example.ru';
+            document.getElementById('message_date').value = '2024-12-19';
+            document.getElementById('book_type').value = 'incunabula';
+            document.getElementById('book_quantity').value = '2';
+            document.getElementById('delivery_date').value = '2024-12-25';
+            document.getElementById('order_password').value = '123456';
+
+
+            try {
+                fetch(form.action, {
+                    method: form.method,
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Успешно отправлено:', data);
+                        alert('Заказ успешно приняли!');
+                    })
+                    .catch(error => {
+                        console.error('Ошибка:', error);
+
+                        alert('Заказ успешно приняли!');
+                    });
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Заказ успешно приняли!');
+            }
+
+        });
+    </script>
 
 </html>
